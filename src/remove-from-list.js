@@ -14,19 +14,32 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For l = [3, 1, 2, 3, 4, 5] and k = 3,
  * the output should be [1, 2, 4, 5]
  *
- * Singly - linked lists are already defined using interface
- * class ListNode {
- *   constructor(x) {
- *     this.value = x;
- *     this.next = null;
- *   }
- * }
- */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+ * Singly - linked lists are already defined using interface*/
+ class ListNode {
+    constructor(x) {
+      this.value = x;
+      this.next = null;
+    }
+ }
 
+function removeKFromList(l, k) {
+  let arrOfValue = [];
+  while (l!==null) {
+    arrOfValue.push(l.value);
+    l = l.next;
+  }
+  
+  let arrWithoutK = [];
+  for (let i=0; i<arrOfValue.length; i++) {
+    if (arrOfValue[i] !== k) {
+      arrWithoutK.push(arrOfValue[i]);
+    }
+  }
+
+const createList = arr => arr.reduceRight((acc, n) => ({ value: n, next: acc }), null);
+const list = createList(arrWithoutK);
+return list;
+}
 module.exports = {
   removeKFromList
 };
